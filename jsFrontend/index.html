@@ -1,0 +1,40 @@
+<!DOCTYPE html> 
+<html> 
+ <head> 
+  <title> HTML5 NodeJS File Upload </title> 
+ </head> 
+ <body>
+
+  <form action="http://localhost:3000/functions/zip" name="myForm" method="post" enctype="multipart/form-data" > 
+    <input id="inputFile" type="file" name="inputFile" /> 
+    <input id="html5-upload-button" type="submit" value="Upload" /> 
+  </form> 
+
+  <script type="text/javascript">
+    document.forms['myForm'].addEventListener('submit', (event) => {
+        event.preventDefault(event);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:3000/functions/zip"); 
+        xhr.responseType = 'blob';
+        xhr.onload = function(event){ 
+            if (this.status == 200) {
+                var blob = new Blob([this.response], {type: "octet/stream"});
+                var fileName = "output.zip";
+
+                var a = document.createElement('a');
+                a.href = window.URL.createObjectURL(blob);
+                a.download = fileName;
+                a.dispatchEvent(new MouseEvent('click'));
+            } else {
+                alert("Error occurred");
+            }
+        }; 
+        
+        var formData = new FormData(event.target); 
+        xhr.send(formData);
+    });
+  </script>
+
+ </body> 
+</html>
