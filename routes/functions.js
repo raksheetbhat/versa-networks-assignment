@@ -15,7 +15,7 @@ router.post('/zip', (req, res) => {
       
       var zippedFileName = "output.zip";
       var zip = new AdmZip();
-      zip.addFile("test.txt", inputFile.data);
+      zip.addFile(inputFile.name, inputFile.data);
       zip.writeZip(zippedFileName);
       
       res.sendFile(path.resolve(zippedFileName), (err) => {
