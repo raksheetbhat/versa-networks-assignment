@@ -5,7 +5,7 @@
  </head> 
  <body>
 
-  <form action="http://localhost:3000/functions/zip" name="myForm" method="post" enctype="multipart/form-data" > 
+  <form action="/functions/zip" name="myForm" method="post" enctype="multipart/form-data" > 
     <input id="inputFile" type="file" name="inputFile" /> 
     <input id="html5-upload-button" type="submit" value="Upload" /> 
   </form> 
@@ -15,7 +15,7 @@
         event.preventDefault(event);
 
         var xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:3000/functions/zip"); 
+        xhr.open("POST", "/functions/zip"); 
         xhr.responseType = 'blob';
         xhr.onload = function(event){ 
             if (this.status == 200) {
